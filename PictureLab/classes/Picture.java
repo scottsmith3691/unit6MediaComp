@@ -98,6 +98,35 @@ public class Picture extends SimplePicture
     }
   }
   
+   /** Method tokeep only blue */
+  public void keepOnlyBlue()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setGreen(0);
+        pixelObj.setRed(0);
+      }
+    }
+  }
+  
+  /** Method negate picture */
+  public void negate()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setBlue(255-pixelObj.getBlue());
+        pixelObj.setGreen(255-pixelObj.getGreen());
+        pixelObj.setRed(255-pixelObj.getRed());
+      }
+    }
+  }
+  
   /** Method that mirrors the picture around a 
     * vertical mirror in the center of the picture
     * from left to right */
@@ -186,18 +215,31 @@ public class Picture extends SimplePicture
   public void mirrorDiagonal()
   {
     Pixel[][] pixels = this.getPixels2D();
-    Pixel leftPixel = null;
-    Pixel rightPixel = null;
+    Pixel thePixel = null;
+    Pixel oppositePixel = null;
     int length = pixels.length;
-    int width = pixels[0].length;
-    int line = width / length;
+    int height = pixels[0].length;
+    
+    if(length > height )
+    {
+        length=height;
+    }
+    else if( length < height)
+    {
+        height=length;
+    }
+
     for (int row = 0; row < length; row++)
     {
-      for (int col = 0; col < pixels[0].length; col++)
+      for (int col = 0; col < height; col++)
       {
-        leftPixel = pixels[row][col];
-        rightPixel = pixels[col][row];
-        rightPixel.setColor(leftPixel.getColor());
+        if( row < col)
+        {
+            
+            thePixel = pixels[row][col];
+            oppositePixel = pixels[col][row];
+            oppositePixel.setColor(thePixel.getColor());
+        }
       }
     } 
   }
@@ -222,8 +264,10 @@ public class Picture extends SimplePicture
         rightPixel = pixels[row]                       
                          [mirrorPoint - col + mirrorPoint];
         rightPixel.setColor(leftPixel.getColor());
+        count++;
       }
     }
+    System.out.println(count);
   }
   
   /** copy from the passed fromPic to the
@@ -301,6 +345,19 @@ public class Picture extends SimplePicture
     }
   }
   
+  public static void cropAndCopy(Picture sourcePicture, int startSourceRow, int endSourceRow, 
+    int startSourceCol, int endSourceCol,int startDestRow, int startDestCol)
+    {
+       Pixel[][] pixels = sourcePicture.getPixels2D(); 
+       Pixel[][] pixels1 = this.getPixels2D(); 
+       for(int i = startSourceRow; i<=endSourceRow; i++)
+       {
+          for( int x = startSource; x<=endSourceCol; x++)
+            {
+                //pixels1[i][x];
+            }
+       }
+    }
   
   /* Main method for testing - each class in Java can have a main 
    * method 
