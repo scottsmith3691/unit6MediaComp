@@ -345,18 +345,27 @@ public class Picture extends SimplePicture
     }
   }
   
-  public static void cropAndCopy(Picture sourcePicture, int startSourceRow, int endSourceRow, 
+  public void cropAndCopy(Picture sourcePicture, int startSourceRow, int endSourceRow, 
     int startSourceCol, int endSourceCol,int startDestRow, int startDestCol)
     {
-       Pixel[][] pixels = sourcePicture.getPixels2D(); 
-       Pixel[][] pixels1 = this.getPixels2D(); 
+       Pixel[][] pixels = sourcePicture.getPixels2D();
+       Pixel[][] copy = sourcePicture.getPixels2D();
+       Pixel[][] finalPicture = this.getPixels2D(); 
        for(int i = startSourceRow; i<=endSourceRow; i++)
        {
-          for( int x = startSource; x<=endSourceCol; x++)
+          for( int x = startSourceCol; x<=endSourceCol; x++)
             {
-                //pixels1[i][x];
+                copy[i-startSourceRow][x-startSourceCol]=pixels[i][x];
             }
        }
+       
+       for(int y=startDestRow; y < copy.length; y++)
+       {
+           for( int z = startDestCol; z < copy[0].length; z++)
+           {
+               finalPicture[y][z]= copy[y-startDestRow][z-startDestCol];
+            }
+        }
     }
   
   /* Main method for testing - each class in Java can have a main 

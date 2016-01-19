@@ -89,6 +89,15 @@ public class PictureTester
     temple.explore();
   }
   
+  /** Method to test the cropAndCopy method */
+  public static void testCropAndCopy()
+  {
+    Picture canvas = new Picture("temple.jpg");
+    Picture pic=new Picture("caterpillar.jpg");
+    canvas.cropAndCopy(pic,0,40,0,40,30,50);
+    canvas.explore();
+  }
+  
   /** Method to test the collage method */
   public static void testCollage()
   {
@@ -96,6 +105,7 @@ public class PictureTester
     canvas.createCollage();
     canvas.explore();
   }
+  
   
   /** Method to test edgeDetection */
   public static void testEdgeDetection()
