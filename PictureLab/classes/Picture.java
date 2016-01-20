@@ -349,8 +349,11 @@ public class Picture extends SimplePicture
     int startSourceCol, int endSourceCol,int startDestRow, int startDestCol)
     {
        Pixel[][] pixels = sourcePicture.getPixels2D();
-       Pixel[][] copy = sourcePicture.getPixels2D();
+       int length = endSourceRow-startSourceRow+1;
+       int height = endSourceCol-startSourceCol+1;
+       Pixel[][] copy = new Pixel[length][height];
        Pixel[][] finalPicture = this.getPixels2D(); 
+       
        for(int i = startSourceRow; i<=endSourceRow; i++)
        {
           for( int x = startSourceCol; x<=endSourceCol; x++)
@@ -363,7 +366,7 @@ public class Picture extends SimplePicture
        {
            for( int z = startDestCol; z < copy[0].length; z++)
            {
-               finalPicture[y][z]= copy[y-startDestRow][z-startDestCol];
+               finalPicture[y][z].setColor(copy[y-startDestRow][z-startDestCol].getColor());
             }
         }
     }

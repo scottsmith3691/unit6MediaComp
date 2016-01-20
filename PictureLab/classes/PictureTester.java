@@ -94,7 +94,7 @@ public class PictureTester
   {
     Picture canvas = new Picture("temple.jpg");
     Picture pic=new Picture("caterpillar.jpg");
-    canvas.cropAndCopy(pic,0,40,0,40,30,50);
+    canvas.cropAndCopy(pic,1,140,1,140,30,50);
     canvas.explore();
   }
   
