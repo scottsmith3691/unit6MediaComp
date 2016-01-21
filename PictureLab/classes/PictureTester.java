@@ -27,11 +27,11 @@ public class PictureTester
   }
   
   /** Method to test negate */
-  public static void testNegate()
+  public static void testNegateFinal()
   {
     Picture beach = new Picture("beach.jpg");
     beach.explore();
-    beach.negate();
+    beach.negateFinal();
     beach.explore();
   }
   

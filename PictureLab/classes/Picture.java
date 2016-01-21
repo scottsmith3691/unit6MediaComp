@@ -270,6 +270,28 @@ public class Picture extends SimplePicture
     System.out.println(count);
   }
   
+    /**Negates the picture */
+  public void negateFinal()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel[][] changedPixels = this.getPixels2D();
+    // loop through the rows
+    for (int i = 0; i < pixels.length; i++)
+    {
+      // loop through cols
+      for (int x = 0; x < pixels[0].length ;x++)
+      { 
+        
+        changedPixels[i][x].setRed(255 - changedPixels[i][x].getRed());
+        changedPixels[i][x].setBlue(255 - changedPixels[i][x].getBlue());
+        changedPixels[i][x].setGreen(255 - changedPixels[i][x].getGreen());
+        pixels[i][x].setColor(changedPixels[i][x].getColor());
+        
+      }
+    }
+    
+  }
+  
   /** copy from the passed fromPic to the
     * specified startRow and startCol in the
     * current picture
@@ -349,16 +371,16 @@ public class Picture extends SimplePicture
     int startSourceCol, int endSourceCol,int startDestRow, int startDestCol)
     {
        Pixel[][] pixels = sourcePicture.getPixels2D();
-       int length = endSourceRow-startSourceRow+1;
-       int height = endSourceCol-startSourceCol+1;
-       Pixel[][] copy = new Pixel[length][height];
+       int height = endSourceRow-startSourceRow+1;
+       int width = endSourceCol-startSourceCol+1;
+       Pixel[][] copy = new Pixel[height][width];
        Pixel[][] finalPicture = this.getPixels2D(); 
        
        for(int i = startSourceRow; i<=endSourceRow; i++)
        {
           for( int x = startSourceCol; x<=endSourceCol; x++)
             {
-                copy[i-startSourceRow][x-startSourceCol]=pixels[i][x];
+                copy[i-startSourceRow+1][x-startSourceCol+1]=pixels[i][x];
             }
        }
        
