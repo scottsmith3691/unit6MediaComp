@@ -375,23 +375,25 @@ public class Picture extends SimplePicture
        int width = endSourceCol-startSourceCol+1;
        Pixel[][] copy = new Pixel[height][width];
        Pixel[][] finalPicture = this.getPixels2D(); 
-       
-       for(int i = startSourceRow; i<=endSourceRow; i++)
+    
+       for(int i = startSourceRow; i <= endSourceRow; i++)
        {
-          for( int x = startSourceCol; x<=endSourceCol; x++)
+          for( int x = startSourceCol; x <= endSourceCol; x++)
             {
-                copy[i-startSourceRow+1][x-startSourceCol+1]=pixels[i][x];
+                copy[i-startSourceRow][x-startSourceCol]=pixels[i][x];
             }
        }
        
-       for(int y=startDestRow; y < copy.length; y++)
+       for(int y=startDestRow; y < startDestRow+height; y++)
        {
-           for( int z = startDestCol; z < copy[0].length; z++)
+           for( int z = startDestCol; z < startDestCol+width; z++)
            {
                finalPicture[y][z].setColor(copy[y-startDestRow][z-startDestCol].getColor());
             }
         }
+
     }
+  
   
   /* Main method for testing - each class in Java can have a main 
    * method 
